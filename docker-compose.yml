@@ -8,6 +8,9 @@ services:
             - ./docker/app/.env
         ports:
             - "8080:8080"
+        depends_on:
+            - db
+        command: ["/usr/local/bin/go-cloud-native/wait-for-mysql.sh", "db", "/usr/local/bin/go-cloud-native/init.sh"]
     db:
         build: ./docker/mariadb/
         environment:
