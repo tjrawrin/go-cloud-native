@@ -1,16 +1,16 @@
-package db
+package gorm
 
 import (
-	"database/sql"
 	"fmt"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 
 	"go-cloud-native/config"
 )
 
 // New ...
-func New(conf *config.Conf) (*sql.DB, error) {
+func New(conf *config.Conf) (*gorm.DB, error) {
 	cfg := &mysql.Config{
 		Net:                  "tcp",
 		Addr:                 fmt.Sprintf("%v:%v", conf.Db.Host, conf.Db.Port),
@@ -21,5 +21,5 @@ func New(conf *config.Conf) (*sql.DB, error) {
 		ParseTime:            true,
 	}
 
-	return sql.Open("mysql", cfg.FormatDSN())
+	return gorm.Open("mysql", cfg.FormatDSN())
 }

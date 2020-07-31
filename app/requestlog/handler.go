@@ -1,12 +1,13 @@
 package requestlog
 
 import (
-	"go-cloud-native/util/logger"
 	"io"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"time"
+
+	"go-cloud-native/util/logger"
 )
 
 // Handler ...

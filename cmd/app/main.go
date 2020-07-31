@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	dbConn "go-cloud-native/adapter/gorm"
 	"go-cloud-native/app/app"
 	"go-cloud-native/app/router"
 	"go-cloud-native/config"
@@ -15,7 +16,16 @@ func main() {
 
 	logger := lr.New(appConf.Debug)
 
-	application := app.New(logger)
+	db, err := dbConn.New(appConf)
+	if err != nil {
+		logger.Fatal().Err(err).Msg("")
+		return
+	}
+	if appConf.Debug {
+		db.LogMode(true)
+	}
+
+	application := app.New(logger, db)
 
 	appRouter := router.New(application)
 
@@ -34,9 +44,4 @@ func main() {
 	if err := s.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		logger.Fatal().Err(err).Msg("Server startup failed")
 	}
-}
-
-// Greet ...
-func Greet(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
 }

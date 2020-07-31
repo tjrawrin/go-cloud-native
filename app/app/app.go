@@ -1,15 +1,23 @@
 package app
 
-import "go-cloud-native/util/logger"
+import (
+	"github.com/jinzhu/gorm"
+
+	"go-cloud-native/util/logger"
+)
 
 // App ...
 type App struct {
 	logger *logger.Logger
+	db     *gorm.DB
 }
 
 // New ...
-func New(logger *logger.Logger) *App {
-	return &App{logger: logger}
+func New(logger *logger.Logger, db *gorm.DB) *App {
+	return &App{
+		logger: logger,
+		db:     db,
+	}
 }
 
 // Logger ...
