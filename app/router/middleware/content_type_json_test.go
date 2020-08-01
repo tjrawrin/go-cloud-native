@@ -34,7 +34,7 @@ func TestContentTypeJSON(t *testing.T) {
 }
 
 func sampleHandlerFunc() func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprint(w, expRespBody)
 	}
 }
