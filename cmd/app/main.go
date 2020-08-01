@@ -9,6 +9,7 @@ import (
 	"go-cloud-native/app/router"
 	"go-cloud-native/config"
 	lr "go-cloud-native/util/logger"
+	vr "go-cloud-native/util/validator"
 )
 
 func main() {
@@ -25,7 +26,9 @@ func main() {
 		db.LogMode(true)
 	}
 
-	application := app.New(logger, db)
+	validator := vr.New()
+
+	application := app.New(logger, db, validator)
 
 	appRouter := router.New(application)
 
