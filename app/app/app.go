@@ -6,6 +6,14 @@ import (
 	"go-cloud-native/util/logger"
 )
 
+const (
+	appErrDataAccessFailure   = "data access failure"
+	appErrJSONCreationFailure = "json creation failure"
+	appErrDataCreationFailure = "data creation failure"
+	appErrFormDecodingFailure = "form decoding failure"
+	appErrDataUpdateFailure   = "data update failure"
+)
+
 // App ...
 type App struct {
 	logger *logger.Logger
